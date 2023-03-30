@@ -16,3 +16,21 @@ describe("Duel Duo tests", () => {
     await driver.wait(until.titleIs("Duel Duo"), 1000);
   });
 });
+test("clicking the Draw button displays the div with id = 'choices'", async () => {
+    render(<Game />);
+    const drawButton = screen.getByRole("button", { name: "Draw" });
+    userEvent.click(drawButton);
+    await waitFor(() => screen.getByRole("heading", { name: "Choose your fighter:" }));
+    expect(screen.getByTestId("choices")).toBeInTheDocument();
+});
+
+test("clicking an 'Add to Duo' button displays the div with id = 'player-duo'", async () => {
+    render(<Game />);
+    const drawButton = screen.getByRole("button", { name: "Draw" });
+    userEvent.click(drawButton);
+    await waitFor(() => screen.getByRole("heading", { name: "Choose your fighter:" }));
+    const addButton = screen.getByRole("button", { name: "Add to Duo" });
+    userEvent.click(addButton);
+    await waitFor(() => screen.getByRole("heading", { name: "Your Duo:" }));
+    expect(screen.getByTestId("player-duo")).toBeInTheDocument();
+});
