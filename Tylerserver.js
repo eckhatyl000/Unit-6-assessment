@@ -89,3 +89,10 @@ app.get("/api/player", (req, res) => {
 app.listen(8000, () => {
   console.log(`Listening on 8000`);
 });
+const Rollbar = require("rollbar");
+
+const rollbar = new Rollbar({
+    accessToken: "",
+    captureUncaught: true,
+    captureUnhandledRejections: true
+});
